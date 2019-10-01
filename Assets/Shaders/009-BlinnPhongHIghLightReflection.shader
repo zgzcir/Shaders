@@ -1,6 +1,5 @@
-﻿Shader "Unlit/008-FragmentHighLightReflection"
-{ 
-   Properties
+﻿Shader "Unlit/009-BlinnPhongHIghLightReflection"
+{ Properties
 	{
 		_Diffuse("Diffuse", Color) = (1,1,1,1)
 		_Specular("Specular", Color) = (1,1,1,1)
@@ -37,7 +36,7 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				fixed3 worldNormal = UnityObjectToWorldNormal( v.normal);
 				o.worldNormal = worldNormal;
-				o.worldPos =  mul(unity_ObjectToWorld, v.vertex);
+				o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 				return o;
 			}
 			
@@ -50,10 +49,11 @@
 				fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * max(0,dot(worldLightDir,i.worldNormal));
 
 				//高光反射
-				fixed3 reflectDir = normalize(reflect(-worldLightDir,i.worldNormal));
-				//fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
+				//fixed3 reflectDir = normalize(reflect(-worldLightDir,i.worldNormal));
 				fixed3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
-				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(saturate(dot(reflectDir,viewDir)),_Gloss);
+				//fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
+				fixed3 halfDir = normalize(worldLightDir + viewDir);
+				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(saturate(dot(i.worldNormal,halfDir)),_Gloss);
 				
 				fixed3 color = ambient + diffuse + specular;
 				return fixed4(color,1);
