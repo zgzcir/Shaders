@@ -47,7 +47,7 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 				o.normalUv = TRANSFORM_TEX(v.texcoord, _BumpMap);
-
+                
 				//求副切线向量
 				//float3 binormal = cross(v.normal,v.tangent.xyz) * v.tangent.w;
 				//float3x3 rotation = float3x3(v.tangent.xyz, binormal, v.normal);
