@@ -33,7 +33,7 @@
 			float4 _SpecularMask_ST;
             float _SpecularScale;
 			float4 _BumpMap_ST;
-			float _BumpScale;
+			float _BumpScale; 
 			fixed4 _Diffuse;
 			fixed4 _Specular;
 			float _Gloss;
@@ -44,7 +44,6 @@
 				fixed3 lightDir: TEXCOORD0;
 				float3 viewDir: TEXCOORD1;
 				float4 uv : TEXCOORD2;
-				float2 normalUv : TEXCOORD3;
                 float2 maskUv:TEXCOORD4;
         	};
 
@@ -73,7 +72,7 @@
 				fixed3 tangentLightDir = normalize(i.lightDir);
 				fixed3 tangentviewDir = normalize(i.viewDir);
 
-				fixed4 packedNormal = tex2D(_BumpMap,i.normalUv.zw);
+				fixed4 packedNormal = tex2D(_BumpMap,i.uv.zw);
 
 				//没有设置成normal map
 				//fixed3 tangentNormal;
