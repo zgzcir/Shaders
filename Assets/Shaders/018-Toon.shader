@@ -28,7 +28,7 @@
 CGPROGRAM
 
 #pragma vertex vert
-#pragma fragment frag
+ #pragma fragment frag
 #include "UnityCG.cginc"
 fixed4 _XrayColor;
 float _XrayPower;
@@ -166,4 +166,6 @@ ENDCG
             ENDCG
         }
     }
+	FallBack "Diffuse"
+  
 }
