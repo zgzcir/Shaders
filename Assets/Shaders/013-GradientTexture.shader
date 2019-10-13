@@ -50,9 +50,9 @@
 			{
 				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
             
-            	//漫反射
+            	//漫反射 
 				fixed3 worldLightDir = UnityWorldSpaceLightDir(i.worldPos);
-				fixed halfLamert=max(0,dot(worldLightDir,i.worldNormal))*0.5+0.5;
+				fixed halfLamert=dot(worldLightDir,i.worldNormal)*0.5+0.5;
 				fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * tex2D(_RampTex,fixed2(halfLamert,halfLamert));
 
 				//高光反射
